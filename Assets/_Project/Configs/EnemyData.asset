@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427ddbeb45b41244985c651334416cb9, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.EnemyData
+  enemies:
+  - name: Test Enemy
+    id: test_enemy
+    health: 10
+    reward: 5
+    enemyPrefab: {fileID: 5310907660601645162, guid: 46a627b4285930f48b3be5f23e511ead, type: 3}
