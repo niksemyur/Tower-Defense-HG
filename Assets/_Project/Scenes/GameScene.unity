@@ -425,8 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9973e2772b3d5e648bfa841f820ec566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBuilder
-  towersContainer: {fileID: 668864110}
-  towerFactory: {fileID: 166285035}
+  _towersContainer: {fileID: 668864110}
+  _towerFactory: {fileID: 166285035}
 --- !u!1 &258380849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,13 +1800,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd42aeca56830b041b2ab8948fc289a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameLoader
-  currencyManager: {fileID: 56365691}
-  gridManager: {fileID: 1715001582}
-  towerBuilder: {fileID: 198693823}
-  gameUIController: {fileID: 4362622164854526005}
-  enemySpawner: {fileID: 1355046224}
-  gameConfig: {fileID: 11400000, guid: 6a39236086a6d984ebbb49f9c2e2af95, type: 2}
-  levelConfig: {fileID: 11400000, guid: f49ac267c981c0f4f987209487693eb7, type: 2}
+  _currencyManager: {fileID: 56365691}
+  _gridManager: {fileID: 1715001582}
+  _towerBuilder: {fileID: 198693823}
+  _gameUIController: {fileID: 4362622164854526005}
+  _enemySpawner: {fileID: 1355046224}
+  _gameConfig: {fileID: 11400000, guid: 6a39236086a6d984ebbb49f9c2e2af95, type: 2}
+  _levelConfig: {fileID: 11400000, guid: f49ac267c981c0f4f987209487693eb7, type: 2}
 --- !u!1 &997084476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,9 +2277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69828d28034941429fc897634e229fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelController
-  enemiesContainer: {fileID: 1126033967}
-  spawnPoint: {fileID: 1046990273}
-  enemyPathPoints:
+  _enemiesContainer: {fileID: 1126033967}
+  _spawnPoint: {fileID: 1046990273}
+  _enemyPathPoints:
   - {fileID: 447025854170556496}
   - {fileID: 947265186}
   - {fileID: 5212763321339895153}
@@ -2638,7 +2638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c697695d32a6604498505cae0cd7308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Gameplay.GridManager
-  cells:
+  _cells:
   - {fileID: 4472096179639829874}
   - {fileID: 534780364}
   - {fileID: 1914539476}

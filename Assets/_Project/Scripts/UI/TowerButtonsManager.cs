@@ -5,28 +5,18 @@ namespace TowerDefense.UI
 {
     public class TowerButtonsManager : MonoBehaviour
     {
-        [SerializeField] private TowerButton[] towerButtons;
-
-        public void Init()
-        {
-            foreach (var buttonController in towerButtons)
+        [SerializeField] private TowerButton[] _towerButtons;
+        public void Init(GameConfig gameConfig)
+        {     
+            if (gameConfig.PlayerTowers == null || gameConfig.PlayerTowers.Length < _towerButtons.Length)
             {
-                buttonController.Init();
-            }
-        }
-
-        public void Load(GameConfig gameConfig)
-        {
-            
-            if (gameConfig.PlayerTowers == null || gameConfig.PlayerTowers.Length < towerButtons.Length)
-            {
-                Debug.LogError("No towers configured in GameConfig!");
+                Debug.LogError("Башни не назначены в GameConfig!");
                 return;
             }
 
-            for (int i = 0; i < towerButtons.Length; i++)
+            for (int i = 0; i < _towerButtons.Length; i++)
             {
-                towerButtons[i].Load(gameConfig.PlayerTowers[i]);
+                _towerButtons[i].Init(gameConfig.PlayerTowers[i]);
             }
         }
     }

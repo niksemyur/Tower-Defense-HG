@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84426d50339f3f24abca79db951bdb5b, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.TowersData
-  towerName: "\u041B\u0443\u0447\u043D\u0438\u043A"
-  cost: 10
-  range: 2
-  attackCooldown: 1
-  damage: 2
-  projectileSpeed: 10
-  projectile: {fileID: -8385952900251060095, guid: eee064be3dd0e8e49ace5f66d7d7e3d8, type: 3}
-  towerPrefab: {fileID: 3229591462387417005, guid: 90e5bde355c857f4f95ef1b067621f1f, type: 3}
+  _towerName: "\u041B\u0443\u0447\u043D\u0438\u043A"
+  _towerCost: 10
+  _range: 2
+  _attackCooldown: 1
+  _damage: 2
+  _projectileSpeed: 10
+  _projectileRange: 1
+  _projectile: {fileID: 8684704170441757048, guid: 0027aed6d0284404598d8d3866a04116, type: 3}
+  _towerPrefab: {fileID: 3229591462387417005, guid: 90e5bde355c857f4f95ef1b067621f1f, type: 3}

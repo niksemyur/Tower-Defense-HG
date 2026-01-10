@@ -6,23 +6,23 @@ namespace TowerDefense.UI
 {
     public class CurrencyDisplay : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI currencyText;
+        [SerializeField] private TextMeshProUGUI _currencyText;
 
-        public void Init()
+        private void Awake ()
         {
-            CurrencyManager.Instance.OnCurrencyChanged += UpdateDisplay;
+            CurrencyManager.OnCurrencyChanged += UpdateDisplay;
         }
 
         private void UpdateDisplay()
         {
-            currencyText.text = CurrencyManager.Instance.Currency.ToString();
+            _currencyText.text = CurrencyManager.Instance.Currency.ToString();
         }
 
         private void OnDestroy()
         {
             if (CurrencyManager.Instance != null)
             {
-                CurrencyManager.Instance.OnCurrencyChanged -= UpdateDisplay;
+                CurrencyManager.OnCurrencyChanged -= UpdateDisplay;
             }
         }
     }

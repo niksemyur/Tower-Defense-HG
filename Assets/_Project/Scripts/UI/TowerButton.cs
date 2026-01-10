@@ -8,48 +8,47 @@ namespace TowerDefense.UI
 {
     public class TowerButton : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI towerNameTxt;
-        [SerializeField] private TextMeshProUGUI costTxt;
+        [SerializeField] private TextMeshProUGUI _towerNameTxt;
+        [SerializeField] private TextMeshProUGUI _towerCostTxt;
 
-        private TowerData towerData;
-        private int cost;
+        private int _towerCost;
+        private TowerData _towerData;
+        private Button _button;
 
-        private Button button;
-        public void Init()
+        private void Awake ()
         {
-            button = GetComponent<Button>();
-            CurrencyManager.Instance.OnCurrencyChanged += CheckState;
-            GridManager.Instance.OnGridChanged += CheckState;
+            _button = GetComponent<Button>();
+            CurrencyManager.OnCurrencyChanged += CheckState;
+            GridManager.OnGridChanged += CheckState;
         }
 
-        public void Load(TowerData _towerData)
+        public void Init (TowerData towerData)
         {
-            towerData = _towerData;
-
-            cost = towerData.Cost;
-            towerNameTxt.text = towerData.TowerName;
-            costTxt.text = cost.ToString();
+            _towerData = towerData;
+            _towerCost = _towerData.TowerCost;
+            _towerNameTxt.text = towerData.TowerName;
+            _towerCostTxt.text = _towerCost.ToString();
         }
 
         public void Select ()
         {
-            TowerBuilder.Instance.BuildTower(towerData);
+            TowerBuilder.Instance.BuildTower(_towerData);
         }
 
         private void CheckState()
         {
-            button.interactable = CurrencyManager.Instance.HasEnough(cost) && GridManager.Instance.IsHaveEmptyCells();
+            _button.interactable = CurrencyManager.Instance.HasEnough(_towerCost) && GridManager.Instance.IsHaveEmptyCells();
         }
 
         private void OnDestroy()
         {
             if (CurrencyManager.Instance != null)
             {
-                CurrencyManager.Instance.OnCurrencyChanged -= CheckState;
+                CurrencyManager.OnCurrencyChanged -= CheckState;
             }
             if (GridManager.Instance != null)
             {
-                GridManager.Instance.OnGridChanged -= CheckState;
+                GridManager.OnGridChanged -= CheckState;
             }
         }
     }

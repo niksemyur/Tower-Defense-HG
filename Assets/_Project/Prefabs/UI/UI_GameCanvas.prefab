@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784214baa114ac9409b915d470232f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerButtonsManager
-  towerButtons:
+  _towerButtons:
   - {fileID: 1021899966056935430}
   - {fileID: 5054727787082736578}
 --- !u!114 &1872821762669194043
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7255191657731840131}
   - component: {fileID: 4090736681610799269}
   m_Layer: 5
-  m_Name: 'Text_CurrencyValue    '
+  m_Name: Text_Currency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527ed14a8f856fb4ea068580ff3d5353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUIController
-  currencyDisplay: {fileID: 4579652478188403043}
-  towerButtonsManager: {fileID: 3408226307537983923}
+  _currencyDisplay: {fileID: 4579652478188403043}
+  _towerButtonsManager: {fileID: 3408226307537983923}
 --- !u!1 &7358824995680214244
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1331f9f4d97feae47992952e090490e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyDisplay
-  currencyText: {fileID: 4090736681610799269}
+  _currencyText: {fileID: 4090736681610799269}
 --- !u!222 &4555056055332641703
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -7,11 +7,11 @@ namespace TowerDefense.Gameplay.Managers
     public class EnemySpawner : MonoBehaviour
     {
         [Header("Containers")]
-        [SerializeField] private Transform enemiesContainer; // Транформ для врагов на сцене
+        [SerializeField] private Transform _enemiesContainer; // Транформ для врагов на сцене
 
         [Header("Path")]
-        [SerializeField] private Transform spawnPoint; 
-        [SerializeField] private Transform[] enemyPathPoints; // Поинты пути движения врагов
+        [SerializeField] private Transform _spawnPoint; 
+        [SerializeField] private Transform[] _enemyPathPoints; // Поинты пути движения врагов
 
         [Header("Factory")]
         [SerializeField]  private EnemyFactory _enemyFactory;
@@ -53,9 +53,9 @@ namespace TowerDefense.Gameplay.Managers
 
                 var enemy = _enemyFactory.CreateEnemy(
                     _levelConfig.EnemyData,
-                    spawnPoint,
-                    enemyPathPoints,
-                    enemiesContainer
+                    _spawnPoint,
+                    _enemyPathPoints,
+                    _enemiesContainer
                 );
 
                 if (enemy == null)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427ddbeb45b41244985c651334416cb9, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.EnemyData
-  enemyName: Enemy
-  health: 5
-  reward: 5
-  enemyPrefab: {fileID: 5310907660601645162, guid: 46a627b4285930f48b3be5f23e511ead, type: 3}
+  _enemyName: Enemy
+  _health: 5
+  _reward: 5
+  _enemyPrefab: {fileID: 5310907660601645162, guid: 46a627b4285930f48b3be5f23e511ead, type: 3}

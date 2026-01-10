@@ -6,7 +6,7 @@ namespace TowerDefense.Entities.Enemy
 {
     public abstract class BaseEnemy : MonoBehaviour
     {
-        [SerializeField] private EnemyData enemyData;
+        [SerializeField] private EnemyData _enemyData;
 
         [SerializeField] protected float RotationThreshold = 0.01f; // минимальная дистанция для поворота
         [SerializeField] protected float ArrivalDistance = 0.1f; // минимальная дистанция достижения поинта
@@ -20,18 +20,11 @@ namespace TowerDefense.Entities.Enemy
         private float _health;
         public bool IsAlive => _isAlive;
 
-        // ПРИМЕЧАНИЕ ДЛЯ РЕВЬЮВЕРА:
-        // Статическое событие выбрано осознанно для прототипа Tower Defense, так подписан на него только RewardManager.
-        public static event Action<BaseEnemy, int> OnEnemyDied;
-        // Плюсы: простота, скорость разработки, меньше кода.
-        // Минусы: глобальное состояние, сложнее тестировать.
-        // 
-        // Когда проект вырастет (5+ систем подписанных на смерть врагов):
-        // 1. Заменить на EventBus/ScriptableObject Events
+        public static event Action<int> OnEnemyDied;
 
         public void Init(Transform[] pathPoints)
         {
-            _health = enemyData.Health;
+            _health = _enemyData.Health;
             _pathPoints = pathPoints;
         }
 
@@ -73,7 +66,7 @@ namespace TowerDefense.Entities.Enemy
         {
             if (!_isAlive) return;
             _isAlive = false;
-            OnEnemyDied?.Invoke(this, enemyData.Reward);
+            OnEnemyDied?.Invoke(_enemyData.Reward);
             Destroy(gameObject);
         }
 

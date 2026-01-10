@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4633e26db249b44bab7ba65baed054, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.LevelConfig
-  enemySpawnTime: 1
-  enemyData: {fileID: 11400000, guid: 00225354fd54bad4b940650902146519, type: 2}
+  _enemySpawnTime: 1
+  _enemyData: {fileID: 11400000, guid: 00225354fd54bad4b940650902146519, type: 2}

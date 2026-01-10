@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65766293e2297d499d75e04daba6f9d, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.GameConfig
-  startCurrency: 30
-  playerTowers:
+  _startCurrency: 30
+  _playerTowers:
   - {fileID: 11400000, guid: c51362add15af6c4fabfac0b830b1ace, type: 2}
   - {fileID: 11400000, guid: 24cafbe55c567e54a9cc1d329f11266a, type: 2}

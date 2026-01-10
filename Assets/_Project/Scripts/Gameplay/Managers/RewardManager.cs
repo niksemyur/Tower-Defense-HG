@@ -17,7 +17,7 @@ namespace TowerDefense.Gameplay.Managers
         }
 
         // Выдать награду за убитого врага
-        private void GiveReward(BaseEnemy deadEnemy, int rewardAmount)
+        private void GiveReward(int rewardAmount)
         {
             CurrencyManager.Instance.AddCurrency(rewardAmount);
         }

@@ -7,27 +7,27 @@ namespace TowerDefense.Configs
     public class TowerData : ScriptableObject
     {
         [Header("Info")]
-        [SerializeField] private string towerName;
-        [SerializeField] private int cost;
+        [SerializeField] private string _towerName;
+        [SerializeField] private int _towerCost;
 
         [Header("Combat")]
-        [SerializeField] private float range = 5f; // Радиус атаки 
-        [SerializeField] private float attackCooldown = 1f; // Перезарядка 
-        [SerializeField] private float damage = 10f; // Урон
-        [SerializeField] private float projectileSpeed = 10f; // Скорость снаряда
-        [SerializeField] private float projectileRange = 1f;
-        [SerializeField] private BaseProjectile projectile; // Префаб Санярда
+        [SerializeField] private float _range = 5f; // Радиус атаки 
+        [SerializeField] private float _attackCooldown = 1f; // Перезарядка 
+        [SerializeField] private float _damage = 10f; // Урон
+        [SerializeField] private float _projectileSpeed = 10f; // Скорость снаряда
+        [SerializeField] private float _projectileRange = 1f;
+        [SerializeField] private BaseProjectile _projectile; // Префаб Санярда
 
         [Header("Prefab")]
-        [SerializeField] private GameObject towerPrefab;
-        public string TowerName => towerName;
-        public int Cost => cost;
-        public GameObject TowerPrefab => towerPrefab;
-        public float Range => range;
-        public float AttackCooldown => attackCooldown;
-        public float Damage => damage;
-        public float ProjectileSpeed => projectileSpeed;
-        public float ProjectileRange => projectileRange;
-        public BaseProjectile Projectile => projectile;
+        [SerializeField] private GameObject _towerPrefab;
+        public string TowerName => _towerName;
+        public int TowerCost => _towerCost;
+        public GameObject TowerPrefab => _towerPrefab;
+        public float Range => _range;
+        public float AttackCooldown => _attackCooldown;
+        public float Damage => _damage;
+        public float ProjectileSpeed => _projectileSpeed;
+        public float ProjectileRange => _projectileRange;
+        public BaseProjectile Projectile => _projectile;
     }
 }

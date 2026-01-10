@@ -12,12 +12,11 @@ namespace TowerDefense.Gameplay.Managers
         private int _currency;
 
         public int Currency => _currency;
-        public event Action OnCurrencyChanged;
 
-        public void Init(GameConfig config)
+        public static event Action OnCurrencyChanged;
+
+        private void Awake()
         {
-            _gameConfig = config;
-
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -25,6 +24,11 @@ namespace TowerDefense.Gameplay.Managers
             }
 
             Instance = this;
+        }
+
+        public void Init(GameConfig config)
+        {
+            _gameConfig = config;
         }
 
         public void Load()

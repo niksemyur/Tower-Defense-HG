@@ -7,13 +7,13 @@ namespace TowerDefense.Configs
     {
         [Header("Economy")]
 
-        [SerializeField] private int startCurrency;
+        [SerializeField] private int _startCurrency;
 
         [Header("Combat")]
 
-        [SerializeField] private TowerData[] playerTowers;
+        [SerializeField] private TowerData[] _playerTowers;
 
-        public int StartCurrency => startCurrency;
-        public TowerData[] PlayerTowers => playerTowers;
+        public int StartCurrency => _startCurrency;
+        public TowerData[] PlayerTowers => _playerTowers;
     }
 }

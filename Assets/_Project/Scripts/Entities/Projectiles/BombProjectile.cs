@@ -2,7 +2,8 @@ using UnityEngine;
 using TowerDefense.Entities.Enemy;
 
 namespace TowerDefense.Entities.Projectiles
-{    // Снаряд который взрывается при достижении цели, нанося урон по области
+{    
+    // Снаряд который взрывается при достижении цели, нанося урон по области
     public class BombProjectile : BaseProjectile
     {
         protected override void OnReachTarget()

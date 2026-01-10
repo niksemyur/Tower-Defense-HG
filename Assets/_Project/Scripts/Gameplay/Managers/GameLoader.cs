@@ -11,17 +11,17 @@ namespace TowerDefense.Gameplay.Managers
     public class GameLoader : MonoBehaviour
     {
         [Header("Base Systems")]
-        [SerializeField] private CurrencyManager currencyManager;   // Управление валютой
-        [SerializeField] private GridManager gridManager;           // Игровая сетка
-        [SerializeField] private TowerBuilder towerBuilder;         // Строитель башен
+        [SerializeField] private CurrencyManager _currencyManager;   // Управление валютой
+        [SerializeField] private GridManager _gridManager;           // Игровая сетка
+        [SerializeField] private TowerBuilder _towerBuilder;         // Строитель башен
 
         [Header("Dependent Systems")]
-        [SerializeField] private GameUIController gameUIController; // UI игры
-        [SerializeField] private EnemySpawner enemySpawner;         // Спавнер врагов
+        [SerializeField] private GameUIController _gameUIController; // UI игры
+        [SerializeField] private EnemySpawner _enemySpawner;         // Спавнер врагов
 
         [Header("Configs")]
-        [SerializeField] private GameConfig gameConfig;             // Основные настройки
-        [SerializeField] private LevelConfig levelConfig;          // Управление параметрамми игрового уровня
+        [SerializeField] private GameConfig _gameConfig;             // Основные настройки
+        [SerializeField] private LevelConfig _levelConfig;          // Управление параметрамми игрового уровня
 
         private void Awake()
         {
@@ -32,28 +32,18 @@ namespace TowerDefense.Gameplay.Managers
             LoadSystems();
         }
 
-        //Подписки на события, создание синглтонов
         private void InitSystems()
         {
-            // 1. Базовые системы (нижний уровень)
-            gridManager.Init();
-            currencyManager.Init(gameConfig);
-
-            // 2. Системы, зависящие от базовых (верхний уровень)
-            gameUIController.Init();
-            enemySpawner.Init(levelConfig);
+            _currencyManager.Init(_gameConfig);
+            _enemySpawner.Init(_levelConfig);
+            _gameUIController.Init(_gameConfig);
         }
 
-        //Инициализация с обновлением данных, вызывает ивенты после подписания в Init
         private void LoadSystems ()
         {
-            // 1. Базовые системы (нижний уровень)
-            gridManager.Load();
-            currencyManager.Load();
-
-            // 2. Системы, зависящие от базовых (верхний уровень)
-            gameUIController.Load(gameConfig);
-            enemySpawner.Load();
+            _gridManager.Load();
+            _currencyManager.Load();
+            _enemySpawner.Load();
         }
 
         // Примечание по архитектуре:

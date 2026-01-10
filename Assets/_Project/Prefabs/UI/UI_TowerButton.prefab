@@ -283,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da54f356ff7e46840b88a9092ef204ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerButton
-  towerNameTxt: {fileID: 90742685718171945}
-  costTxt: {fileID: 166270504100227192}
+  _towerNameTxt: {fileID: 90742685718171945}
+  _towerCostTxt: {fileID: 166270504100227192}
 --- !u!1 &4592239056286422416
 GameObject:
   m_ObjectHideFlags: 0

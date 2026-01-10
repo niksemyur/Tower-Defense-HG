@@ -311,12 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca0835cf3c703a429a3bfaa1cc4f58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Entities.Tower
-  towerData: {fileID: 11400000, guid: 24cafbe55c567e54a9cc1d329f11266a, type: 2}
-  projectileSpawnPoint: {fileID: 5781228168547954940}
-  rotationSpeed: 5
-  targetSearchInterval: 0.3
-  aimThreshold: 10
-  enemyLayer:
+  _towerData: {fileID: 11400000, guid: 24cafbe55c567e54a9cc1d329f11266a, type: 2}
+  _projectileSpawnPoint: {fileID: 5781228168547954940}
+  _rotationSpeed: 5
+  _targetSearchInterval: 0.3
+  _aimThreshold: 10
+  _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!1 &9094915167413842435

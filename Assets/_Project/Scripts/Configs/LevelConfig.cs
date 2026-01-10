@@ -6,10 +6,10 @@ namespace TowerDefense.Configs
     public class LevelConfig : ScriptableObject
     {
         [Header("Difficulty")]
-        [SerializeField] private float enemySpawnTime = 1f;
-        [SerializeField] private EnemyData enemyData;
+        [SerializeField] private float _enemySpawnTime = 1f;
+        [SerializeField] private EnemyData _enemyData;
 
-        public float EnemySpawnTime => enemySpawnTime;
-        public EnemyData EnemyData => enemyData;
+        public float EnemySpawnTime => _enemySpawnTime;
+        public EnemyData EnemyData => _enemyData;
     }
 }

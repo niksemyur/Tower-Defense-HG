@@ -6,18 +6,12 @@ namespace TowerDefense.UI
     public class GameUIController : MonoBehaviour
     {
         [Header ("UI Managers")]
-        [SerializeField] private CurrencyDisplay currencyDisplay;
-        [SerializeField] private TowerButtonsManager towerButtonsManager;
+        [SerializeField] private CurrencyDisplay _currencyDisplay;
+        [SerializeField] private TowerButtonsManager _towerButtonsManager;
 
-        public void Init()
+        public void Init(GameConfig gameConfig)
         {
-            currencyDisplay.Init();
-            towerButtonsManager.Init();
-        }
-
-        public void Load (GameConfig gameConfig)
-        {
-            towerButtonsManager.Load(gameConfig);
+            _towerButtonsManager.Init(gameConfig);
         }
     }
 }

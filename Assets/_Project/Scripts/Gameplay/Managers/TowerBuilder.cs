@@ -7,9 +7,9 @@ namespace TowerDefense.Gameplay.Managers
     public class TowerBuilder : MonoBehaviour
     {
         [Header("Containers")]
-        [SerializeField] private Transform towersContainer;
+        [SerializeField] private Transform _towersContainer;
         [Header("Factory")]
-        [SerializeField] private TowerFactory towerFactory;
+        [SerializeField] private TowerFactory _towerFactory;
         public static TowerBuilder Instance { get; private set; }
 
         private void Awake()
@@ -26,7 +26,7 @@ namespace TowerDefense.Gameplay.Managers
         public void BuildTower(TowerData towerData)
         {
             // 1. Проверить валюту
-            int towerCost = towerData.Cost;
+            int towerCost = towerData.TowerCost;
             if (!CurrencyManager.Instance.HasEnough(towerCost))
             {
                 Debug.Log("Not enough currency");
@@ -48,11 +48,11 @@ namespace TowerDefense.Gameplay.Managers
             GridManager.Instance.SetGridBusyState(emptyCell, true);
 
             // 5. Создать башню
-            var tower = towerFactory.CreateTower
+            var tower = _towerFactory.CreateTower
             (
             towerData,
             emptyCell.transform,
-            towersContainer   
+            _towersContainer   
             );
 
             if (tower == null)

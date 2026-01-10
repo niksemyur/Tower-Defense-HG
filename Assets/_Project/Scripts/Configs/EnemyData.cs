@@ -7,18 +7,18 @@ namespace TowerDefense.Configs
     public class EnemyData : ScriptableObject
     {
         [Header("Info")]
-        [SerializeField] private string enemyName;
+        [SerializeField] private string _enemyName;
 
         [Header("Parameters")]
-        [SerializeField] private float health;
-        [SerializeField] private int reward;
+        [SerializeField] private float _health;
+        [SerializeField] private int _reward;
 
         [Header("Prefab")]
-        [SerializeField] private GameObject enemyPrefab;
-        public string EnemyName => enemyName;
-        public float Health => health;
-        public int Reward => reward;
-        public GameObject EnemyPrefab => enemyPrefab;
+        [SerializeField] private GameObject _enemyPrefab;
+        public string EnemyName => _enemyName;
+        public float Health => _health;
+        public int Reward => _reward;
+        public GameObject EnemyPrefab => _enemyPrefab;
 
     }
 }
