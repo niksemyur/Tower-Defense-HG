@@ -18,11 +18,11 @@ namespace TowerDefense.Gameplay.Managers
 
         private Coroutine _spawningCoroutine;
 
-        private LevelManager _levelManager;
+        private LevelConfig _levelConfig;
 
-        public void Init (LevelManager levelManager)
+        public void Init (LevelConfig levelConfig)
         {
-            _levelManager = levelManager;
+            _levelConfig = levelConfig;
         }
 
         public void Load ()
@@ -49,10 +49,10 @@ namespace TowerDefense.Gameplay.Managers
         {
             while (true)
             {
-                yield return new WaitForSeconds(_levelManager.EnemySpawnTime);
+                yield return new WaitForSeconds(_levelConfig.EnemySpawnTime);
 
                 var enemy = _enemyFactory.CreateEnemy(
-                    _levelManager.EnemyData,
+                    _levelConfig.EnemyData,
                     spawnPoint,
                     enemyPathPoints,
                     enemiesContainer

@@ -16,7 +16,8 @@ MonoBehaviour:
   cost: 20
   range: 2
   attackCooldown: 1
-  damage: 4
+  damage: 2
   projectileSpeed: 10
+  projectileRange: 2
   projectile: {fileID: 8684704170441757048, guid: 0027aed6d0284404598d8d3866a04116, type: 3}
   towerPrefab: {fileID: 9046797688594785678, guid: 2498795b7c4f9ff47bfdbf696991741c, type: 3}

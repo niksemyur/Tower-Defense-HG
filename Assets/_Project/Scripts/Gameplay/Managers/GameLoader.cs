@@ -11,17 +11,17 @@ namespace TowerDefense.Gameplay.Managers
     public class GameLoader : MonoBehaviour
     {
         [Header("Base Systems")]
-        [SerializeField] private CurrencyManager currencyManager; // Управление валютой
-        [SerializeField] private GridManager gridManager;         // Игровая сетка
-        [SerializeField] private TowerBuilder towerBuilder;       // Строитель башен
-        [SerializeField] private LevelManager levelManager;       // Управление параметрамми игрового уровня
+        [SerializeField] private CurrencyManager currencyManager;   // Управление валютой
+        [SerializeField] private GridManager gridManager;           // Игровая сетка
+        [SerializeField] private TowerBuilder towerBuilder;         // Строитель башен
 
         [Header("Dependent Systems")]
         [SerializeField] private GameUIController gameUIController; // UI игры
         [SerializeField] private EnemySpawner enemySpawner;         // Спавнер врагов
 
         [Header("Configs")]
-        [SerializeField] private GameConfig gameConfig;   // Основные настройки
+        [SerializeField] private GameConfig gameConfig;             // Основные настройки
+        [SerializeField] private LevelConfig levelConfig;          // Управление параметрамми игрового уровня
 
         private void Awake()
         {
@@ -41,7 +41,7 @@ namespace TowerDefense.Gameplay.Managers
 
             // 2. Системы, зависящие от базовых (верхний уровень)
             gameUIController.Init();
-            enemySpawner.Init(levelManager);
+            enemySpawner.Init(levelConfig);
         }
 
         //Инициализация с обновлением данных, вызывает ивенты после подписания в Init
