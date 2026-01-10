@@ -19,5 +19,5 @@ MonoBehaviour:
   _damage: 2
   _projectileSpeed: 10
   _projectileRange: 1
-  _projectile: {fileID: 8684704170441757048, guid: 0027aed6d0284404598d8d3866a04116, type: 3}
+  _projectile: {fileID: -8385952900251060095, guid: eee064be3dd0e8e49ace5f66d7d7e3d8, type: 3}
   _towerPrefab: {fileID: 3229591462387417005, guid: 90e5bde355c857f4f95ef1b067621f1f, type: 3}
