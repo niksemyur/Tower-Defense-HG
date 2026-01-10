@@ -8,9 +8,9 @@ namespace TowerDefense.Gameplay.Managers
     {
         [Header("Containers")]
         [SerializeField] private Transform towersContainer;
+        [Header("Factory")]
+        [SerializeField] private TowerFactory towerFactory;
         public static TowerBuilder Instance { get; private set; }
-
-        private TowersData towersData;
 
         private void Awake()
         {
@@ -23,29 +23,17 @@ namespace TowerDefense.Gameplay.Managers
             Instance = this;
         }
 
-        public void Init(TowersData data)
+        public void BuildTower(TowerData towerData)
         {
-            towersData = data;
-        }
-
-        public void BuildTower(string towerId)
-        {
-            // 1. Получить информацию о башне
-            TowerInfo towerInfo = towersData.GetTowerInfo(towerId);
-            if (towerInfo == null)
-            {
-                Debug.LogError($"Tower info not found for ID: {towerId}");
-                return;
-            }
-
-            // 2. Проверить валюту
-            if (!CurrencyManager.Instance.HasEnough(towerInfo.Cost))
+            // 1. Проверить валюту
+            int towerCost = towerData.Cost;
+            if (!CurrencyManager.Instance.HasEnough(towerCost))
             {
                 Debug.Log("Not enough currency");
                 return;
             }
 
-            // 3. Получить свободную ячейку
+            // 2. Получить свободную ячейку
             GridCell emptyCell = GridManager.Instance.GetRandomEmptyCell();
             if (emptyCell == null)
             {
@@ -53,22 +41,24 @@ namespace TowerDefense.Gameplay.Managers
                 return;
             }
 
-            // 4. Списать валюту
-            CurrencyManager.Instance.SpendCurrency(towerInfo.Cost);
+            // 3. Списать валюту
+            CurrencyManager.Instance.SpendCurrency(towerCost);
 
-            // 5. Занять ячейку
+            // 4. Занять ячейку
             GridManager.Instance.SetGridBusyState(emptyCell, true);
 
-            // 6. Получить префаб
-            GameObject towerPrefab = towerInfo.TowerPrefab;
-            if (towerPrefab == null)
-            {
-                Debug.LogError($"Prefab not found for tower ID: {towerId}");
-                return;
-            }
+            // 5. Создать башню
+            var tower = towerFactory.CreateTower
+            (
+            towerData,
+            emptyCell.transform,
+            towersContainer   
+            );
 
-            // 7. Создать башню
-            GameObject towerObj = Instantiate(towerPrefab, emptyCell.transform.position, Quaternion.identity, towersContainer);
+            if (tower == null)
+            {
+                Debug.LogWarning("Не удалось создать башню - " + towerData.name + "");
+            }
         }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.GameConfig
   startCurrency: 30
-  startPlayerTowers:
-  - tower_archer
-  - tower_bomber
+  playerTowers:
+  - {fileID: 11400000, guid: c51362add15af6c4fabfac0b830b1ace, type: 2}
+  - {fileID: 11400000, guid: 24cafbe55c567e54a9cc1d329f11266a, type: 2}

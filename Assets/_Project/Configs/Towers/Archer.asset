@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84426d50339f3f24abca79db951bdb5b, type: 3}
-  m_Name: TowersData
+  m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.TowersData
-  towers:
-  - name: "\u041B\u0443\u0447\u043D\u0438\u043A"
-    id: tower_archer
-    cost: 10
-    towerPrefab: {fileID: 3229591462387417005, guid: 90e5bde355c857f4f95ef1b067621f1f, type: 3}
-  - name: "\u041F\u043E\u0434\u0440\u044B\u0432\u043D\u0438\u043A"
-    id: tower_bomber
-    cost: 20
-    towerPrefab: {fileID: 9046797688594785678, guid: 2498795b7c4f9ff47bfdbf696991741c, type: 3}
+  towerName: "\u041B\u0443\u0447\u043D\u0438\u043A"
+  cost: 10
+  range: 2
+  attackCooldown: 1
+  damage: 2
+  projectileSpeed: 10
+  projectile: {fileID: -8385952900251060095, guid: eee064be3dd0e8e49ace5f66d7d7e3d8, type: 3}
+  towerPrefab: {fileID: 3229591462387417005, guid: 90e5bde355c857f4f95ef1b067621f1f, type: 3}

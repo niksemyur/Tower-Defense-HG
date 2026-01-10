@@ -11,20 +11,17 @@ namespace TowerDefense.Gameplay.Managers
     public class GameLoader : MonoBehaviour
     {
         [Header("Base Systems")]
-        [SerializeField] private CurrencyManager currencyManager; // Управление деньгами
+        [SerializeField] private CurrencyManager currencyManager; // Управление валютой
         [SerializeField] private GridManager gridManager;         // Игровая сетка
         [SerializeField] private TowerBuilder towerBuilder;       // Строитель башен
+        [SerializeField] private LevelManager levelManager;       // Управление параметрамми игрового уровня
 
         [Header("Dependent Systems")]
         [SerializeField] private GameUIController gameUIController; // UI игры
-        [SerializeField] private EnemyFactory enemyFactory;         // Фабрика врагов
         [SerializeField] private EnemySpawner enemySpawner;         // Спавнер врагов
-        [SerializeField] private RewardManager rewardManager;       // Награды за убийства
 
         [Header("Configs")]
         [SerializeField] private GameConfig gameConfig;   // Основные настройки
-        [SerializeField] private TowersData towersData;   // Конфиг башней
-        [SerializeField] private EnemyData enemyData;     // Конфиг врагов
 
         private void Awake()
         {
@@ -41,13 +38,10 @@ namespace TowerDefense.Gameplay.Managers
             // 1. Базовые системы (нижний уровень)
             gridManager.Init();
             currencyManager.Init(gameConfig);
-            towerBuilder.Init(towersData);
 
             // 2. Системы, зависящие от базовых (верхний уровень)
             gameUIController.Init();
-            enemyFactory.Init(enemyData);
-            enemySpawner.Init(enemyFactory);
-            rewardManager.Init();
+            enemySpawner.Init(levelManager);
         }
 
         //Инициализация с обновлением данных, вызывает ивенты после подписания в Init
@@ -58,7 +52,7 @@ namespace TowerDefense.Gameplay.Managers
             currencyManager.Load();
 
             // 2. Системы, зависящие от базовых (верхний уровень)
-            gameUIController.Load(gameConfig, towersData);
+            gameUIController.Load(gameConfig);
             enemySpawner.Load();
         }
 

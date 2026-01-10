@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TowerDefense.Configs;
 
 namespace TowerDefense.Gameplay.Managers
 {
@@ -12,16 +13,16 @@ namespace TowerDefense.Gameplay.Managers
         [SerializeField] private Transform spawnPoint; 
         [SerializeField] private Transform[] enemyPathPoints; // Поинты пути движения врагов
 
-        [Header("Difficulty")]
-        [SerializeField] private float enemySpawnTime = 1f;
-        [SerializeField] private string spawnEnemyId = "test_enemy";
+        [Header("Factory")]
+        [SerializeField]  private EnemyFactory _enemyFactory;
 
-        private EnemyFactory _enemyFactory;
         private Coroutine _spawningCoroutine;
 
-        public void Init(EnemyFactory enemyFactory)
+        private LevelManager _levelManager;
+
+        public void Init (LevelManager levelManager)
         {
-            _enemyFactory = enemyFactory;
+            _levelManager = levelManager;
         }
 
         public void Load ()
@@ -48,10 +49,10 @@ namespace TowerDefense.Gameplay.Managers
         {
             while (true)
             {
-                yield return new WaitForSeconds(enemySpawnTime);
+                yield return new WaitForSeconds(_levelManager.EnemySpawnTime);
 
                 var enemy = _enemyFactory.CreateEnemy(
-                    spawnEnemyId,
+                    _levelManager.EnemyData,
                     spawnPoint,
                     enemyPathPoints,
                     enemiesContainer
@@ -59,7 +60,7 @@ namespace TowerDefense.Gameplay.Managers
 
                 if (enemy == null)
                 {
-                    Debug.LogWarning("Не удалось создать врага!");
+                    Debug.LogWarning("Не удалось создать врага - " + enemy.name + "");
                 }
             }
         }

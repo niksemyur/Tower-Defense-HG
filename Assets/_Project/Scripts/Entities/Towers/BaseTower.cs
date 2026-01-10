@@ -1,17 +1,14 @@
 using UnityEngine;
 using TowerDefense.Entities.Enemy;
 using TowerDefense.Entities.Projectiles;
+using TowerDefense.Configs;
 
 namespace TowerDefense.Entities.Towers
 {
     public class BaseTower : MonoBehaviour //можно сделать абстрактным в последствии
-    { 
-        [Header ("Attack")] // На этапе прототипа не вынесено в конфиг башни
-        [SerializeField] private float range = 5f; // Радиус атаки 
-        [SerializeField] private float attackCooldown = 1f; // Перезарядка 
-        [SerializeField] private float damage = 10f; // Урон
-        [SerializeField] private float projectileSpeed = 10f; // Скорость снаряда
-        [SerializeField] private BaseProjectile projectile; // Префаб Санярда
+    {
+        [Header("Config")]
+        [SerializeField] private TowerData towerData;
 
         [Header("Aiming")]
         [SerializeField] private Transform projectileSpawnPoint; // Транформ появления снаряда
@@ -58,7 +55,7 @@ namespace TowerDefense.Entities.Towers
                 if (_isAimedAtTarget && _attackTimer <= 0)
                 {
                     Attack();
-                    _attackTimer = attackCooldown;
+                    _attackTimer = towerData.AttackCooldown;
                 }
             }
         }
@@ -76,7 +73,7 @@ namespace TowerDefense.Entities.Towers
         // Получение ближайшей цели
         private BaseEnemy FindBestTarget()
         {
-            Collider[] enemies = Physics.OverlapSphere(transform.position, range, enemyLayer);
+            Collider[] enemies = Physics.OverlapSphere(transform.position, towerData.Range, enemyLayer);
 
             if (enemies.Length == 0) return null;
 
@@ -103,7 +100,7 @@ namespace TowerDefense.Entities.Towers
         // Проверка что цель в радиусе
         private bool IsTargetInRange(BaseEnemy target)
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= range;
+            return Vector3.Distance(transform.position, target.transform.position) <= towerData.Range;
         }
 
         // Плавный поворот к цели
@@ -139,8 +136,8 @@ namespace TowerDefense.Entities.Towers
 
         private void Attack()
         {
-            BaseProjectile newProjectile = Instantiate(projectile, projectileSpawnPoint.position, Quaternion.identity);
-            newProjectile.Init(damage, projectileSpeed);
+            BaseProjectile newProjectile = Instantiate(towerData.Projectile, projectileSpawnPoint.position, Quaternion.identity);
+            newProjectile.Init(towerData.Damage, towerData.ProjectileSpeed, towerData.ProjectileRange);
             newProjectile.Launch(_currentTarget.transform);
         }
 
@@ -148,7 +145,7 @@ namespace TowerDefense.Entities.Towers
         {
             if (!drawGizmos) return;
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, range);
+            Gizmos.DrawWireSphere(transform.position, towerData.Range);
         }
     }
 }

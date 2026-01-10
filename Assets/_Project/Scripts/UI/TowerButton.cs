@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TowerDefense.Gameplay.Managers;
+using TowerDefense.Configs;
 
 namespace TowerDefense.UI
 {
@@ -10,34 +11,34 @@ namespace TowerDefense.UI
         [SerializeField] private TextMeshProUGUI towerNameTxt;
         [SerializeField] private TextMeshProUGUI costTxt;
 
-        private string _towerId;
-        private int _cost;
+        private TowerData towerData;
+        private int cost;
 
-        private Button _button;
+        private Button button;
         public void Init()
         {
-            _button = GetComponent<Button>();
+            button = GetComponent<Button>();
             CurrencyManager.Instance.OnCurrencyChanged += CheckState;
             GridManager.Instance.OnGridChanged += CheckState;
         }
 
-        public void Load(string towerId, int cost, string towerName)
+        public void Load(TowerData _towerData)
         {
-            _towerId = towerId;
-            _cost = cost;
+            towerData = _towerData;
 
-            towerNameTxt.text = towerName;
-            costTxt.text = _cost.ToString();
+            cost = towerData.Cost;
+            towerNameTxt.text = towerData.TowerName;
+            costTxt.text = cost.ToString();
         }
 
         public void Select ()
         {
-            TowerBuilder.Instance.BuildTower(_towerId);
+            TowerBuilder.Instance.BuildTower(towerData);
         }
 
         private void CheckState()
         {
-            _button.interactable = CurrencyManager.Instance.HasEnough(_cost) && GridManager.Instance.IsHaveEmptyCells();
+            button.interactable = CurrencyManager.Instance.HasEnough(cost) && GridManager.Instance.IsHaveEmptyCells();
         }
 
         private void OnDestroy()

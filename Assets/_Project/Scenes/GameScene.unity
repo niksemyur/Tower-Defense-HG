@@ -304,6 +304,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &166285033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166285034}
+  - component: {fileID: 166285035}
+  m_Layer: 0
+  m_Name: TowerFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &166285034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166285033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589265317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &166285035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166285033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd74bc3b8c205624294f436f430a61a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Gameplay.Managers.TowerFactory
 --- !u!1 &169217177
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerBuilder
   towersContainer: {fileID: 668864110}
+  towerFactory: {fileID: 166285035}
 --- !u!1 &258380849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,9 +1205,11 @@ Transform:
   - {fileID: 56365692}
   - {fileID: 1508557536}
   - {fileID: 1715001581}
+  - {fileID: 1914157221}
   - {fileID: 198693822}
-  - {fileID: 1366206780}
+  - {fileID: 166285034}
   - {fileID: 1355046223}
+  - {fileID: 1366206780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &608909290
@@ -1757,13 +1804,11 @@ MonoBehaviour:
   currencyManager: {fileID: 56365691}
   gridManager: {fileID: 1715001582}
   towerBuilder: {fileID: 198693823}
+  levelManager: {fileID: 1914157222}
   gameUIController: {fileID: 4362622164854526005}
-  enemyFactory: {fileID: 1366206781}
   enemySpawner: {fileID: 1355046224}
   rewardManager: {fileID: 1508557537}
   gameConfig: {fileID: 11400000, guid: 6a39236086a6d984ebbb49f9c2e2af95, type: 2}
-  towersData: {fileID: 11400000, guid: c51362add15af6c4fabfac0b830b1ace, type: 2}
-  enemyData: {fileID: 11400000, guid: 00225354fd54bad4b940650902146519, type: 2}
 --- !u!1 &997084476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,8 +2285,7 @@ MonoBehaviour:
   - {fileID: 447025854170556496}
   - {fileID: 947265186}
   - {fileID: 5212763321339895153}
-  enemySpawnTime: 2
-  spawnEnemyId: test_enemy
+  _enemyFactory: {fileID: 1366206781}
 --- !u!1 &1366206779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,6 +2833,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1914157220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914157221}
+  - component: {fileID: 1914157222}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1914157221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914157220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589265317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914157222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914157220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f480da5ccbf39f44905d89f16df8a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  enemySpawnTime: 1
+  enemyData: {fileID: 11400000, guid: 00225354fd54bad4b940650902146519, type: 2}
 --- !u!1001 &1914539474
 PrefabInstance:
   m_ObjectHideFlags: 0

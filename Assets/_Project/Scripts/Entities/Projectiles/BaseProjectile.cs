@@ -8,14 +8,16 @@ namespace TowerDefense.Entities.Projectiles
 
         protected float Damage = 10f;
         protected float Speed = 10f;
+        protected float Range;
         protected Transform Target;
 
         private Vector3 _targetPosition;
 
-        public void Init (float projectileDamage, float projectileSpeed)
+        public void Init(float projectileDamage, float projectileSpeed, float projectileRange)
         {
             Damage = projectileDamage;
             Speed = projectileSpeed;
+            Range = projectileRange;
         }
 
         public void Launch(Transform targetTransform)

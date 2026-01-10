@@ -15,9 +15,9 @@ namespace TowerDefense.UI
             towerButtonsManager.Init();
         }
 
-        public void Load (GameConfig gameConfig, TowersData towersData)
+        public void Load (GameConfig gameConfig)
         {
-            towerButtonsManager.Load(gameConfig, towersData);
+            towerButtonsManager.Load(gameConfig);
         }
     }
 }

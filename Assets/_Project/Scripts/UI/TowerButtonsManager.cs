@@ -15,10 +15,10 @@ namespace TowerDefense.UI
             }
         }
 
-        public void Load(GameConfig gameConfig, TowersData towersData)
+        public void Load(GameConfig gameConfig)
         {
             
-            if (gameConfig.StartPlayerTowers == null || gameConfig.StartPlayerTowers.Length < towerButtons.Length)
+            if (gameConfig.PlayerTowers == null || gameConfig.PlayerTowers.Length < towerButtons.Length)
             {
                 Debug.LogError("No towers configured in GameConfig!");
                 return;
@@ -26,8 +26,7 @@ namespace TowerDefense.UI
 
             for (int i = 0; i < towerButtons.Length; i++)
             {
-                TowerInfo towerInfo = towersData.GetTowerInfo(gameConfig.StartPlayerTowers[i]);
-                towerButtons[i].Load(towerInfo.Id, towerInfo.Cost, towerInfo.Name);
+                towerButtons[i].Load(gameConfig.PlayerTowers[i]);
             }
         }
     }

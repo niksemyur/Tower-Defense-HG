@@ -11,13 +11,9 @@ namespace TowerDefense.Configs
 
         [Header("Combat")]
 
-        [SerializeField] private string[] startPlayerTowers = new string[]
-        {
-            "tower_archer",  // Лучник
-            "tower_bomber"   // Подрывник
-        };
+        [SerializeField] private TowerData[] playerTowers;
 
         public int StartCurrency => startCurrency;
-        public string[] StartPlayerTowers => startPlayerTowers;
+        public TowerData[] PlayerTowers => playerTowers;
     }
 }
