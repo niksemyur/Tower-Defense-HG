@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefense.Configs.TowersData
   _towerName: "\u041B\u0443\u0447\u043D\u0438\u043A"
+  _towerId: tower_archer
   _towerCost: 10
   _range: 2
   _attackCooldown: 1

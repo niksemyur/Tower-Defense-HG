@@ -19,12 +19,14 @@ namespace TowerDefense.Gameplay.Installers
         [Header("Configs")]
         [SerializeField] private GameConfig _gameConfig;            // Основные настройки
         [SerializeField] private LevelConfig _levelConfig;          // Управление параметрами игрового уровня
+        [SerializeField] private TowerDataBase _towerDataBase;      // Датабейз всех башень
 
         public override void InstallBindings()
         {
             // Конфиги
             Container.Bind<GameConfig>().FromInstance(_gameConfig).AsSingle();
             Container.Bind<LevelConfig>().FromInstance(_levelConfig).AsSingle();
+            Container.Bind<TowerDataBase>().FromInstance(_towerDataBase).AsSingle();
 
             // Фабрики
             Container.Bind<EnemyFactory>().AsSingle().NonLazy();

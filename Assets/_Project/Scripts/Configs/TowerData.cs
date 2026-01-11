@@ -8,6 +8,7 @@ namespace TowerDefense.Configs
     {
         [Header("Info")]
         [SerializeField] private string _towerName;
+        [SerializeField] private string _towerId;
         [SerializeField] private int _towerCost;
 
         [Header("Combat")]
@@ -21,6 +22,7 @@ namespace TowerDefense.Configs
         [Header("Prefab")]
         [SerializeField] private GameObject _towerPrefab;
         public string TowerName => _towerName;
+        public string TowerId => _towerId;
         public int TowerCost => _towerCost;
         public GameObject TowerPrefab => _towerPrefab;
         public float Range => _range;

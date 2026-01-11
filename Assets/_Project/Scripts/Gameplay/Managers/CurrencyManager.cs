@@ -47,7 +47,7 @@ namespace TowerDefense.Gameplay.Managers
         private void ChangeCurrency(int amount)
         {
             _currency += amount;
-            var signal = new OnCurrencyChanged();
+            var signal = new OnCurrencyChangedSignal();
             _signalBus.Fire(signal);
         }
     }

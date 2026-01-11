@@ -1,6 +1,7 @@
 using UnityEngine;
 using TowerDefense.Configs;
 using TowerDefense.Gameplay.Grid;
+using TowerDefense.Signals;
 using Zenject;
 
 namespace TowerDefense.Gameplay.Managers
@@ -13,63 +14,69 @@ namespace TowerDefense.Gameplay.Managers
         private TowerFactory _towerFactory;
         private CurrencyManager _currencyManager;
         private GridManager _gridManager;
-        public static TowerBuilder Instance { get; private set; }
+        private SignalBus _signalBus;
+        private TowerDataBase _towerDataBase;
 
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-        }
+        private TowerData AllTowers;
 
         [Inject]
-        public void Construct(TowerFactory towerFactory, CurrencyManager currencyManager, GridManager gridManager)
+        public void Construct(SignalBus signalBus, TowerFactory towerFactory, CurrencyManager currencyManager, GridManager gridManager, TowerDataBase towerDataBase)
         {
+            _signalBus = signalBus;
             _towerFactory = towerFactory;
             _currencyManager = currencyManager;
             _gridManager = gridManager;
+            _towerDataBase = towerDataBase;
         }
 
-        public void BuildTower(TowerData towerData)
+        public void Initialize ()
         {
-            // 1. Проверить валюту
+            _signalBus.Subscribe<TowerSelectedSignal>(BuildTower);
+        }
+
+        public void BuildTower(TowerSelectedSignal signal)
+        {   
+            //1. Получаем конфиг башни
+            TowerData towerData = _towerDataBase.GetTower(signal.TowerId);
+            if (towerData == null)
+            {
+                return;
+            }
+
+            // 2. Проверить валюту
             int towerCost = towerData.TowerCost;
             if (!_currencyManager.HasEnough(towerCost))
             {
-                Debug.Log("Not enough currency");
+                Debug.Log("Не хватает валюты");
                 return;
             }
 
-            // 2. Получить свободную ячейку
+            // 3. Получить свободную ячейку
             GridCell emptyCell = _gridManager.GetRandomEmptyCell();
             if (emptyCell == null)
             {
-                Debug.Log("No empty cells available");
+                Debug.Log("Нет свободных слотов");
                 return;
             }
 
-            // 3. Списать валюту
+            // 4. Списать валюту
             _currencyManager.SpendCurrency(towerCost);
 
-            // 4. Занять ячейку
+            // 5. Занять ячейку
             _gridManager.SetGridBusyState(emptyCell, true);
 
-            // 5. Создать башню
+            // 6. Создать башню
             var tower = _towerFactory.CreateTower
             (
             towerData,
             emptyCell.transform,
             _towersContainer   
             );
+        }
 
-            if (tower == null)
-            {
-                Debug.LogWarning("Не удалось создать башню - " + towerData.name + "");
-            }
+        private void OnDestroy()
+        {
+            _signalBus?.TryUnsubscribe<TowerSelectedSignal>(BuildTower);
         }
     }
 }

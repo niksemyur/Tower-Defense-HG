@@ -1827,6 +1827,7 @@ MonoBehaviour:
   _enemySpawner: {fileID: 1355046224}
   _gameConfig: {fileID: 11400000, guid: 6a39236086a6d984ebbb49f9c2e2af95, type: 2}
   _levelConfig: {fileID: 11400000, guid: f49ac267c981c0f4f987209487693eb7, type: 2}
+  _towerDataBase: {fileID: 11400000, guid: aa784893716b49a408bd7041856ebc19, type: 2}
 --- !u!1 &997084476
 GameObject:
   m_ObjectHideFlags: 0

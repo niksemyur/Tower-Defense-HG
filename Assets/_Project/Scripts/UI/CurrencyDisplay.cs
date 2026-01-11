@@ -22,7 +22,7 @@ namespace TowerDefense.UI
 
         public void Initialize()
         {
-            _signalBus.Subscribe<OnCurrencyChanged>(UpdateDisplay);
+            _signalBus.Subscribe<OnCurrencyChangedSignal>(UpdateDisplay);
         }
 
         private void UpdateDisplay()
@@ -32,7 +32,7 @@ namespace TowerDefense.UI
 
         private void OnDestroy()
         {
-            _signalBus?.TryUnsubscribe<OnCurrencyChanged>(UpdateDisplay);
+            _signalBus?.TryUnsubscribe<OnCurrencyChangedSignal>(UpdateDisplay);
         }
     }
 }

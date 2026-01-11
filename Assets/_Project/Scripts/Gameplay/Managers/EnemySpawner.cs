@@ -60,11 +60,6 @@ namespace TowerDefense.Gameplay.Managers
                     _enemyPathPoints,
                     _enemiesContainer
                 );
-
-                if (enemy == null)
-                {
-                    Debug.LogWarning("Не удалось создать врага - " + enemy.name + "");
-                }
             }
         }
 

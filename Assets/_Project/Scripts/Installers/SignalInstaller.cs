@@ -10,8 +10,9 @@ namespace TowerDefense.Gameplay.Installers
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<RewardMoneySignal>();
-            Container.DeclareSignal<OnGridChanged>();
-            Container.DeclareSignal<OnCurrencyChanged>();
+            Container.DeclareSignal<OnGridChangedSignal>();
+            Container.DeclareSignal<OnCurrencyChangedSignal>();
+            Container.DeclareSignal<TowerSelectedSignal>();
         }
     }
 }

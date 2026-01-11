@@ -8,6 +8,7 @@ public class GameInitializer: IInitializable
     [Inject] private RewardManager _rewardManager; 
     [Inject] private GridManager _gridManager;
     [Inject] private EnemySpawner _enemySpawner;
+    [Inject] private TowerBuilder _towerBuilder;
 
     public void Initialize()
     {
@@ -15,6 +16,7 @@ public class GameInitializer: IInitializable
         _rewardManager.Initialize();
         _gridManager.Initialize();
         _enemySpawner.Initialize();
+        _towerBuilder.Initialize();
         _gameUIController.Initialize();
     }
 }

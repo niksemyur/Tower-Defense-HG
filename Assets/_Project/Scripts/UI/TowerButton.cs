@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TowerDefense.Gameplay.Managers;
 using TowerDefense.Configs;
+using TowerDefense.Gameplay.Managers;
 using Zenject;
 using TowerDefense.Signals;
 
@@ -14,7 +14,7 @@ namespace TowerDefense.UI
         [SerializeField] private TextMeshProUGUI _towerCostTxt;
 
         private int _towerCost;
-        private TowerData _towerData;
+        private string _towerId;
         private Button _button;
 
         private SignalBus _signalBus;
@@ -33,18 +33,21 @@ namespace TowerDefense.UI
         {
             _button = GetComponent<Button>();
 
-            _signalBus.Subscribe<OnGridChanged>(CheckState);
-            _signalBus.Subscribe<OnCurrencyChanged>(CheckState);
+            _signalBus.Subscribe<OnGridChangedSignal>(CheckState);
+            _signalBus.Subscribe<OnCurrencyChangedSignal>(CheckState);
 
-            _towerData = towerData;
-            _towerCost = _towerData.TowerCost;
+            _towerId = towerData.TowerId;
+            _towerCost = towerData.TowerCost;
             _towerNameTxt.text = towerData.TowerName;
             _towerCostTxt.text = _towerCost.ToString();
         }
 
         public void Select ()
         {
-            TowerBuilder.Instance.BuildTower(_towerData);
+            _signalBus.Fire(new TowerSelectedSignal
+            {
+                TowerId = _towerId
+            });
         }
 
         private void CheckState()
@@ -54,8 +57,8 @@ namespace TowerDefense.UI
 
         private void OnDestroy()
         {
-            _signalBus?.TryUnsubscribe<OnGridChanged>(CheckState);
-            _signalBus?.TryUnsubscribe<OnCurrencyChanged>(CheckState);
+            _signalBus?.TryUnsubscribe<OnGridChangedSignal>(CheckState);
+            _signalBus?.TryUnsubscribe<OnCurrencyChangedSignal>(CheckState);
         }
     }
 }

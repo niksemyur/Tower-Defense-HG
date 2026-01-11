@@ -60,7 +60,7 @@ namespace TowerDefense.Gameplay.Managers
                 }
             }
             cell.SetBusy(state);
-            var signal = new OnGridChanged();
+            var signal = new OnGridChangedSignal();
             _signalBus.Fire(signal); // Уведомляем об изменении
         }
     }
