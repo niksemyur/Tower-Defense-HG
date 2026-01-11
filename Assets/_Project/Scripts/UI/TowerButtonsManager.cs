@@ -1,14 +1,23 @@
 using UnityEngine;
 using TowerDefense.Configs;
+using Zenject;
 
 namespace TowerDefense.UI
 {
     public class TowerButtonsManager : MonoBehaviour
     {
         [SerializeField] private TowerButton[] _towerButtons;
-        public void Init(GameConfig gameConfig)
+
+        private GameConfig _gameConfig;
+
+        [Inject]
+        public void Construct(GameConfig gameConfig)
+        {
+            _gameConfig = gameConfig;
+        }
+        public void Initialize()
         {     
-            if (gameConfig.PlayerTowers == null || gameConfig.PlayerTowers.Length < _towerButtons.Length)
+            if (_gameConfig.PlayerTowers == null || _gameConfig.PlayerTowers.Length < _towerButtons.Length)
             {
                 Debug.LogError("Башни не назначены в GameConfig!");
                 return;
@@ -16,7 +25,7 @@ namespace TowerDefense.UI
 
             for (int i = 0; i < _towerButtons.Length; i++)
             {
-                _towerButtons[i].Init(gameConfig.PlayerTowers[i]);
+                _towerButtons[i].Initialize(_gameConfig.PlayerTowers[i]);
             }
         }
     }

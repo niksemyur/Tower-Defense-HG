@@ -1,32 +1,27 @@
 using UnityEngine;
+using Zenject;
 using System.Collections.Generic;
 using TowerDefense.Gameplay.Grid;
 using System;
+using TowerDefense.Signals;
 
 namespace TowerDefense.Gameplay.Managers
 {
     public class GridManager : MonoBehaviour
     {
         [SerializeField] private GridCell[] _cells; // ячейки сетки
-        public static GridManager Instance { get; private set; }
 
-        public static event Action OnGridChanged;  // —обытие при изменении сетки (построена/уничтожена башн€)
-
+        private SignalBus _signalBus;
         private List<GridCell> _emptyCells = new List<GridCell>(); // —писок свободных €чеек  
 
-        private void Awake ()
+        [Inject]
+        public void Construct(SignalBus signalBus)
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
+            _signalBus = signalBus;
         }
 
         // «агрузка сетки - заполн€ем список свободных €чеек
-        public void Load()
+        public void Initialize()
         {
             foreach (var cell in _cells)
             {
@@ -65,7 +60,8 @@ namespace TowerDefense.Gameplay.Managers
                 }
             }
             cell.SetBusy(state);
-            OnGridChanged?.Invoke(); // ”ведомл€ем об изменении
+            var signal = new OnGridChanged();
+            _signalBus.Fire(signal); // ”ведомл€ем об изменении
         }
     }
 }

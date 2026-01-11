@@ -1,5 +1,4 @@
 using UnityEngine;
-using TowerDefense.Configs;
 
 namespace TowerDefense.UI
 {
@@ -9,9 +8,10 @@ namespace TowerDefense.UI
         [SerializeField] private CurrencyDisplay _currencyDisplay;
         [SerializeField] private TowerButtonsManager _towerButtonsManager;
 
-        public void Init(GameConfig gameConfig)
+        public void Initialize()
         {
-            _towerButtonsManager.Init(gameConfig);
+            _towerButtonsManager.Initialize();
+            _currencyDisplay.Initialize();
         }
     }
 }

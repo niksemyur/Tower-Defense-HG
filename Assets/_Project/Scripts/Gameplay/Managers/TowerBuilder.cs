@@ -1,6 +1,7 @@
 using UnityEngine;
 using TowerDefense.Configs;
 using TowerDefense.Gameplay.Grid;
+using Zenject;
 
 namespace TowerDefense.Gameplay.Managers
 {
@@ -8,8 +9,10 @@ namespace TowerDefense.Gameplay.Managers
     {
         [Header("Containers")]
         [SerializeField] private Transform _towersContainer;
-        [Header("Factory")]
-        [SerializeField] private TowerFactory _towerFactory;
+
+        private TowerFactory _towerFactory;
+        private CurrencyManager _currencyManager;
+        private GridManager _gridManager;
         public static TowerBuilder Instance { get; private set; }
 
         private void Awake()
@@ -23,18 +26,26 @@ namespace TowerDefense.Gameplay.Managers
             Instance = this;
         }
 
+        [Inject]
+        public void Construct(TowerFactory towerFactory, CurrencyManager currencyManager, GridManager gridManager)
+        {
+            _towerFactory = towerFactory;
+            _currencyManager = currencyManager;
+            _gridManager = gridManager;
+        }
+
         public void BuildTower(TowerData towerData)
         {
             // 1. Проверить валюту
             int towerCost = towerData.TowerCost;
-            if (!CurrencyManager.Instance.HasEnough(towerCost))
+            if (!_currencyManager.HasEnough(towerCost))
             {
                 Debug.Log("Not enough currency");
                 return;
             }
 
             // 2. Получить свободную ячейку
-            GridCell emptyCell = GridManager.Instance.GetRandomEmptyCell();
+            GridCell emptyCell = _gridManager.GetRandomEmptyCell();
             if (emptyCell == null)
             {
                 Debug.Log("No empty cells available");
@@ -42,10 +53,10 @@ namespace TowerDefense.Gameplay.Managers
             }
 
             // 3. Списать валюту
-            CurrencyManager.Instance.SpendCurrency(towerCost);
+            _currencyManager.SpendCurrency(towerCost);
 
             // 4. Занять ячейку
-            GridManager.Instance.SetGridBusyState(emptyCell, true);
+            _gridManager.SetGridBusyState(emptyCell, true);
 
             // 5. Создать башню
             var tower = _towerFactory.CreateTower

@@ -4,7 +4,7 @@ using TowerDefense.Configs;
 
 namespace TowerDefense.Gameplay.Managers
 {
-    public class TowerFactory : MonoBehaviour
+    public class TowerFactory
     {
         public BaseTower CreateTower(TowerData towerData, Transform spawnPoint, Transform towersContainer)
         {
@@ -13,13 +13,19 @@ namespace TowerDefense.Gameplay.Managers
                 Debug.LogError($"Префаб башни '{towerData.name}' не назначен!");
                 return null;
             }
-            GameObject towerObject = Instantiate(towerData.TowerPrefab, spawnPoint.position, spawnPoint.rotation, towersContainer);
+
+            GameObject towerObject = Object.Instantiate(
+                towerData.TowerPrefab,
+                spawnPoint.position,
+                spawnPoint.rotation,
+                towersContainer
+            );
 
             BaseTower tower = towerObject.GetComponent<BaseTower>();
             if (tower == null)
             {
                 Debug.LogError($"Префаб башни '{towerData.name}' не содержит компонент BaseTower!");
-                Destroy(towerObject);
+                Object.Destroy(towerObject);
                 return null;
             }
 

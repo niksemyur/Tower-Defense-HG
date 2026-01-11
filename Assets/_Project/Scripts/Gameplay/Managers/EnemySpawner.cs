@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TowerDefense.Configs;
+using Zenject;
 
 namespace TowerDefense.Gameplay.Managers
 {
@@ -20,12 +21,14 @@ namespace TowerDefense.Gameplay.Managers
 
         private LevelConfig _levelConfig;
 
-        public void Init (LevelConfig levelConfig)
+        [Inject]
+        public void Construct(LevelConfig levelConfig, EnemyFactory enemyFactory)
         {
             _levelConfig = levelConfig;
+            _enemyFactory = enemyFactory;
         }
 
-        public void Load ()
+        public void Initialize()
         {
             StartSpawning();
         }

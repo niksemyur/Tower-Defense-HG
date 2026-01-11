@@ -1,37 +1,27 @@
 using UnityEngine;
 using System;
 using TowerDefense.Configs;
+using Zenject;
+using TowerDefense.Signals;
 
 namespace TowerDefense.Gameplay.Managers
 {
     public class CurrencyManager : MonoBehaviour
     {
-        public static CurrencyManager Instance { get; private set; }
-
+        private SignalBus _signalBus;
         private GameConfig _gameConfig;
         private int _currency;
 
         public int Currency => _currency;
 
-        public static event Action OnCurrencyChanged;
-
-        private void Awake()
+        [Inject]
+        public void Construct(GameConfig gameConfig, SignalBus signalBus)
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
+            _gameConfig = gameConfig;
+            _signalBus = signalBus;
         }
 
-        public void Init(GameConfig config)
-        {
-            _gameConfig = config;
-        }
-
-        public void Load()
+        public void Initialize()
         {
             AddCurrency(_gameConfig.StartCurrency);
         }
@@ -57,8 +47,8 @@ namespace TowerDefense.Gameplay.Managers
         private void ChangeCurrency(int amount)
         {
             _currency += amount;
-            OnCurrencyChanged?.Invoke();
-
+            var signal = new OnCurrencyChanged();
+            _signalBus.Fire(signal);
         }
     }
 }

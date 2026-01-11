@@ -1,25 +1,35 @@
 using UnityEngine;
-using TowerDefense.Entities.Enemy;
+using TowerDefense.Signals;
+using Zenject;
 
 namespace TowerDefense.Gameplay.Managers
 {
     // Выдаёт награды за убийство врагов
     public class RewardManager : MonoBehaviour
     {
-        private void Awake()
+        private CurrencyManager _currencyManager;
+        private SignalBus _signalBus;
+
+        [Inject]
+        public void Construct(CurrencyManager currencyManager, SignalBus signalBus)
         {
-            BaseEnemy.OnEnemyDied += GiveReward;
+            _currencyManager = currencyManager;
+            _signalBus = signalBus;
+        }
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<RewardMoneySignal>(OnRewardMoney);
         }
 
         private void OnDestroy()
         {
-            BaseEnemy.OnEnemyDied -= GiveReward;
+            _signalBus?.TryUnsubscribe<RewardMoneySignal>(OnRewardMoney);
         }
 
-        // Выдать награду за убитого врага
-        private void GiveReward(int rewardAmount)
+        private void OnRewardMoney(RewardMoneySignal signal)
         {
-            CurrencyManager.Instance.AddCurrency(rewardAmount);
+            _currencyManager.AddCurrency(signal.RewardAmount);
         }
     }
 }

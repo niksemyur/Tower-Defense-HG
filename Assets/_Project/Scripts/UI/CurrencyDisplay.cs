@@ -1,6 +1,8 @@
 using TMPro;
 using TowerDefense.Gameplay.Managers;
 using UnityEngine;
+using TowerDefense.Signals;
+using Zenject;
 
 namespace TowerDefense.UI
 {
@@ -8,22 +10,29 @@ namespace TowerDefense.UI
     {
         [SerializeField] private TextMeshProUGUI _currencyText;
 
-        private void Awake ()
+        private SignalBus _signalBus;
+        private CurrencyManager _currencyManager;
+
+        [Inject]
+        public void Construct(SignalBus signalBus, CurrencyManager currencyManager)
         {
-            CurrencyManager.OnCurrencyChanged += UpdateDisplay;
+            _signalBus = signalBus;
+            _currencyManager = currencyManager;
+        }
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<OnCurrencyChanged>(UpdateDisplay);
         }
 
         private void UpdateDisplay()
         {
-            _currencyText.text = CurrencyManager.Instance.Currency.ToString();
+            _currencyText.text = _currencyManager.Currency.ToString();
         }
 
         private void OnDestroy()
         {
-            if (CurrencyManager.Instance != null)
-            {
-                CurrencyManager.OnCurrencyChanged -= UpdateDisplay;
-            }
+            _signalBus?.TryUnsubscribe<OnCurrencyChanged>(UpdateDisplay);
         }
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TowerDefense.Gameplay.Managers;
 using TowerDefense.Configs;
+using Zenject;
+using TowerDefense.Signals;
 
 namespace TowerDefense.UI
 {
@@ -15,15 +17,25 @@ namespace TowerDefense.UI
         private TowerData _towerData;
         private Button _button;
 
-        private void Awake ()
+        private SignalBus _signalBus;
+        private CurrencyManager _currencyManager;
+        private GridManager _gridManager;
+
+        [Inject]
+        public void Construct(SignalBus signalBus, CurrencyManager currencyManager, GridManager gridManager)
         {
-            _button = GetComponent<Button>();
-            CurrencyManager.OnCurrencyChanged += CheckState;
-            GridManager.OnGridChanged += CheckState;
+            _signalBus = signalBus;
+            _currencyManager = currencyManager;
+            _gridManager = gridManager;
         }
 
-        public void Init (TowerData towerData)
+        public void Initialize(TowerData towerData)
         {
+            _button = GetComponent<Button>();
+
+            _signalBus.Subscribe<OnGridChanged>(CheckState);
+            _signalBus.Subscribe<OnCurrencyChanged>(CheckState);
+
             _towerData = towerData;
             _towerCost = _towerData.TowerCost;
             _towerNameTxt.text = towerData.TowerName;
@@ -37,19 +49,13 @@ namespace TowerDefense.UI
 
         private void CheckState()
         {
-            _button.interactable = CurrencyManager.Instance.HasEnough(_towerCost) && GridManager.Instance.IsHaveEmptyCells();
+            _button.interactable = _currencyManager.HasEnough(_towerCost) && _gridManager.IsHaveEmptyCells();
         }
 
         private void OnDestroy()
         {
-            if (CurrencyManager.Instance != null)
-            {
-                CurrencyManager.OnCurrencyChanged -= CheckState;
-            }
-            if (GridManager.Instance != null)
-            {
-                GridManager.OnGridChanged -= CheckState;
-            }
+            _signalBus?.TryUnsubscribe<OnGridChanged>(CheckState);
+            _signalBus?.TryUnsubscribe<OnCurrencyChanged>(CheckState);
         }
     }
 }

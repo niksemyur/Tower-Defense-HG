@@ -1,6 +1,8 @@
 using System;
 using TowerDefense.Configs;
+using TowerDefense.Signals;
 using UnityEngine;
+using Zenject;
 
 namespace TowerDefense.Entities.Enemy
 {
@@ -20,9 +22,15 @@ namespace TowerDefense.Entities.Enemy
         private float _health;
         public bool IsAlive => _isAlive;
 
-        public static event Action<int> OnEnemyDied;
+        private SignalBus _signalBus;
 
-        public void Init(Transform[] pathPoints)
+        [Inject]
+        public void Construct(SignalBus signalBus)
+        {
+            _signalBus = signalBus;
+        }
+
+        public void Initialize(Transform[] pathPoints)
         {
             _health = _enemyData.Health;
             _pathPoints = pathPoints;
@@ -66,7 +74,13 @@ namespace TowerDefense.Entities.Enemy
         {
             if (!_isAlive) return;
             _isAlive = false;
-            OnEnemyDied?.Invoke(_enemyData.Reward);
+
+            var signal = new RewardMoneySignal
+            {
+                RewardAmount = _enemyData.Reward
+            };
+            _signalBus.Fire(signal);
+
             Destroy(gameObject);
         }
 
